@@ -1,0 +1,12 @@
+
+<h1>Shop list: {{shop_list.name}}</h1>
+<div>
+    {{shop_list.created_at}}
+</div>
+<ul>
+    {% for item in items %}
+    <li>
+        {{ item.name }}
+    </li>
+    {% endfor %}
+</ul>
