@@ -7,7 +7,7 @@
             <a href="{% url 'shop_list:shop_list' shop_list.id %}">
                 {{ shop_list.name }} ({{shop_list.created_at}})
             </a>
-            {% async_include "shop_list/partials/item_list.html" items=shop_list.item_set.all %}
+            {% async_include "shop_list/partials/item_list.html" shop_list=shop_list items=shop_list.item_set.all %}
         </li>
     {% endfor %}
 </ul>
