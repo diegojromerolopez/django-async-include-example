@@ -4,7 +4,7 @@ from shop_list.models import ShopList
 
 
 def index(request):
-    shop_lists = ShopList.objects.all().order_by('-created_at')[:2]
+    shop_lists = ShopList.objects.all().order_by('-created_at')[:50]
     return render(request, 'shop_list/index.html', {'shop_lists': shop_lists})
 
 
