@@ -1,6 +1,14 @@
 {% load async_include %}
 
 <h1>Shop lists</h1>
+<div>
+    View
+    {% for size in sizes %}
+        <a href="{% url 'shop_list:index' %}?size={{size}}" title="See shoplists ({{size}})">
+            {{size}}
+        </a>
+    {% endfor %}
+</div>
 <ul>
     {% for shop_list in shop_lists %}
         <li>
