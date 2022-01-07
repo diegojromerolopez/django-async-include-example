@@ -19,4 +19,5 @@ class ShopListTest(BaseTest):
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.context['sizes']), 3)
-        self.assertEqual(len(response.context['shop_lists']), 100)
+        self.assertEqual(len(response.context['shop_lists']), 1)
+        self.assertEqual(response.context['shop_lists'][0].item_set.count(), 1000)

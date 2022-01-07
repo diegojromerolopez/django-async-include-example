@@ -1,16 +1,18 @@
 from django.shortcuts import render, get_object_or_404
-
+from django.http import HttpRequest, HttpResponse
+from django.db.models.query import QuerySet
 from shop_list.models import ShopList
 
 DEFAULT_SHOP_LIST_SIZE = 100
 SHOP_LIST_SIZES = [20, 50, 100]
 
 
-def index(request):
+def index(request: HttpRequest) -> HttpResponse:
     shop_list_size = int(request.GET.get('size', DEFAULT_SHOP_LIST_SIZE))
-    shop_lists = ShopList.objects.all().order_by('-created_at')[:shop_list_size]
+    shop_lists: QuerySet[ShopList] = ShopList.objects.all().order_by('-created_at')[:shop_list_size]
     replacements = {'shop_lists': shop_lists, 'sizes': SHOP_LIST_SIZES}
-    return render(request, 'shop_list/index.html', replacements)
+    template_path = 'shop_list/index.html'
+    return render(request, template_path, replacements)
 
 
 def shop_list(request, shop_list_id):

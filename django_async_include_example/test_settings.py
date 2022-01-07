@@ -3,6 +3,7 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 from typing import List
 
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -68,7 +69,7 @@ WSGI_APPLICATION = 'django_async_include_example.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': BASE_DIR / 'test_db.sqlite3',
     }
 }
 
