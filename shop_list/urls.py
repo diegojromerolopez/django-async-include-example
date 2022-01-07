@@ -7,5 +7,5 @@ urlpatterns = [
     # /shop_lists/
     path('', views.index, name='index'),
     # /shop_list/5/
-    path('<int:shop_list_id>/', views.shop_list, name='shop_list'),
+    path('<int:shop_list_id>/', views.view_shop_list, name='view_shop_list'),
 ]

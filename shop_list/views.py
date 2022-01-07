@@ -15,7 +15,7 @@ def index(request: HttpRequest) -> HttpResponse:
     return render(request, template_path, replacements)
 
 
-def shop_list(request, shop_list_id):
+def view_shop_list(request: HttpRequest, shop_list_id: int) -> HttpResponse:
     shop_list = get_object_or_404(ShopList, id=shop_list_id)
     replacements = {'shop_list': shop_list, 'items': shop_list.item_set.all}
-    return render(request, 'shop_list/shop_list.html', replacements)
+    return render(request, 'shop_list/view_shop_list.html', replacements)
