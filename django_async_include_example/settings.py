@@ -28,7 +28,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'async_include'
+    'async_include',
+    'channels',
+    'ws_include'
 ]
 
 MIDDLEWARE = [
@@ -59,6 +61,7 @@ TEMPLATES = [
     },
 ]
 
+ASGI_APPLICATION = "django_async_include_example.asgi.application"
 WSGI_APPLICATION = 'django_async_include_example.wsgi.application'
 
 

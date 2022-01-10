@@ -1,0 +1,26 @@
+{% load ws_include %}
+
+<h1>Shop lists with ws</h1>
+<div>
+    <a href="{% url 'shop_list:index' %}?use_ws=0" title="Use HTTP async requests">
+        Use HTTP async requests in partial loading
+    </a>
+</div>
+<div>
+    View
+    {% for size in sizes %}
+        <a href="{% url 'shop_list:index' %}?use_ws=1&size={{size}}" title="See shoplists ({{size}})">
+            {{size}}
+        </a>
+    {% endfor %}
+</div>
+<ul>
+    {% for shop_list in shop_lists %}
+        <li>
+            <a href="{% url 'shop_list:view_shop_list' shop_list.id %}">
+                {{ shop_list.name }} ({{shop_list.created_at}})
+            </a>
+            {% ws_include "shop_list/partials/item_list.html" shop_list=shop_list items=shop_list.item_set.all %}
+        </li>
+    {% endfor %}
+</ul>
