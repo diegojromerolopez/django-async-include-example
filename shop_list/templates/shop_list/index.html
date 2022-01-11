@@ -2,6 +2,11 @@
 
 <h1>Shop lists</h1>
 <div>
+    <a href="{% url 'shop_list:index' %}?use_ws=1" title="Use HTTP async requests">
+        Use websockets in partial loading
+    </a>
+</div>
+<div>
     View
     {% for size in sizes %}
         <a href="{% url 'shop_list:index' %}?size={{size}}" title="See shoplists ({{size}})">

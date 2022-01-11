@@ -3,15 +3,20 @@ from django.http import HttpRequest, HttpResponse
 from django.db.models.query import QuerySet
 from shop_list.models import ShopList
 
+DEFAULT_USE_WS = False
 DEFAULT_SHOP_LIST_SIZE = 100
 SHOP_LIST_SIZES = [20, 50, 100]
 
 
 def index(request: HttpRequest) -> HttpResponse:
+    use_ws = bool(int(request.GET.get('use_ws', DEFAULT_USE_WS)))
     shop_list_size = int(request.GET.get('size', DEFAULT_SHOP_LIST_SIZE))
     shop_lists: QuerySet[ShopList] = ShopList.objects.all().order_by('-created_at')[:shop_list_size]
     replacements = {'shop_lists': shop_lists, 'sizes': SHOP_LIST_SIZES}
-    template_path = 'shop_list/index.html'
+    if use_ws:
+        template_path = 'shop_list/index_with_ws.html'
+    else:
+        template_path = 'shop_list/index.html'
     return render(request, template_path, replacements)
 
 
