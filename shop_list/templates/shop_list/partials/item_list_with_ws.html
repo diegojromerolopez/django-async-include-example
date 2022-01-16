@@ -1,0 +1,12 @@
+{% load ws_included_length %}
+
+<div>
+    <h2>Product list ({{items|ws_included_length}})</h2>
+    <ul>
+        {% for item in items %}
+        <li>
+            {{ item.name }}
+        </li>
+        {% endfor %}
+    </ul>
+</div>

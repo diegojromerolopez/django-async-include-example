@@ -21,7 +21,7 @@
             <a href="{% url 'shop_list:view_shop_list' shop_list.id %}">
                 {{ shop_list.name }} ({{shop_list.created_at}})
             </a>
-            {% ws_include "shop_list/partials/item_list.html" shop_list=shop_list items=shop_list.item_set.all %}
+            {% ws_include "shop_list/partials/item_list_with_ws.html" shop_list=shop_list items=shop_list.item_set.all %}
         </li>
     {% endfor %}
 </ul>
