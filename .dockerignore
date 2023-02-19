@@ -1,0 +1,6 @@
+.git
+.github
+.mypy_cache
+db.sqlite3
+tmp
+venv

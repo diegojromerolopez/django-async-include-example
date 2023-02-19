@@ -1,0 +1,34 @@
+version: '3.9'
+services:
+  database:
+    image: postgres
+    user: postgres
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_NAME=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  backend:
+    build:
+      dockerfile: ./tests_e2e/backend.dockerfile
+      context: ../
+    command: ./tests_e2e/backend-entrypoint.sh
+    ports:
+      - "8000:8000"
+    environment:
+      - DEBUG=true
+      - USE_COLLECT_STATIC=true
+      - DATABASE=postgresql
+      - POSTGRES_NAME=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    depends_on:
+      database:
+        condition: service_healthy
+
