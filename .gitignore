@@ -132,4 +132,5 @@ dmypy.json
 .idea/
 
 # Tests E2E mounts
-tests_e2e/data/
+tests_e2e/database/db/
+tests_e2e/frontend/node_modules/

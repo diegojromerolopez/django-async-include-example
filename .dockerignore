@@ -2,5 +2,7 @@
 .github
 .mypy_cache
 db.sqlite3
+tests_e2e/database
+tests_e2e/frontend/node_modules
 tmp
 venv
