@@ -1,10 +1,28 @@
 <div>
-    <h2>Product list</h2>
-    <ul>
-        {% for item in items %}
-        <li>
-            {{ item.name }}
-        </li>
+    <h2 style="font-size: {{ item_list_title_em }}; color: {{ item_list_title_color }}">
+        {{ item_list_title }}
+    </h2>
+    <div>
+        <em>Requested at: {{ request_time }}</em>
+    </div>
+    {{ non_passed_variable }}
+    <div>
+        Remember the percentages (number of food groups: {{food_group_percentages|length}}):
+        <ul>
+        {% for group, perc in food_group_percentages.items %}
+            <li>
+                {{ group }} {{perc}} %
+            </li>
         {% endfor %}
-    </ul>
+        </ul>
+    </div>
+    <div>
+        <ul>
+            {% for item in items %}
+            <li>
+                {{ item.name }}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
 </div>

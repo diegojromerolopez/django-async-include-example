@@ -20,7 +20,7 @@
             <a href="{% url 'shop_list:view_shop_list' shop_list.id %}">
                 {{ shop_list.name }} ({{shop_list.created_at}})
             </a>
-            {% async_include "shop_list/partials/item_list.html" shop_list=shop_list items=shop_list.item_set.all %}
+            {% async_include "shop_list/partials/item_list.html" shop_list=shop_list items=shop_list.item_set.all food_group_percentages=food_group_percentages item_list_title=item_list_title item_list_title_em=12 item_list_title_color="red" request_time=request_time %}
         </li>
     {% endfor %}
 </ul>
