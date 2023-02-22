@@ -1,0 +1,49 @@
+version: '3.9'
+services:
+  database:
+    image: postgres
+    user: postgres
+    volumes:
+      - ./database/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_NAME=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      dockerfile: ./tests_e2e/backend/Dockerfile
+      context: ../
+    command: ./tests_e2e/backend/entrypoint.sh
+    ports:
+      - "8000:8000"
+    environment:
+      - DEBUG=true
+      - USE_COLLECT_STATIC=true
+      - DATABASE=postgresql
+      - POSTGRES_NAME=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    depends_on:
+      database:
+        condition: service_healthy
+    healthcheck:
+      test: "curl --fail --silent --write-out 'HTTP CODE : %{http_code}\n' --output /dev/null http://127.0.0.1:8000/"
+      start_period: 60s
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  frontend:
+    build:
+      dockerfile: ./tests_e2e/frontend/Dockerfile
+      context: ../
+    command: node entrypoint.js
+    depends_on:
+      backend:
+        condition: service_healthy

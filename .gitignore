@@ -130,3 +130,7 @@ dmypy.json
 
 # PyCharm
 .idea/
+
+# Tests E2E mounts
+tests_e2e/database/db/
+tests_e2e/frontend/node_modules/
